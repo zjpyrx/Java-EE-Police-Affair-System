@@ -40,73 +40,13 @@ const routes = [
 
             },
             {
-                path: 'ChangePermission',
-                component: () => import('../components/PoliceManagement/ChangePermission.vue'),
-                props:true,
-            },
-            {
-                path: 'PayrollManagement',
-                component: () => import('../components/PoliceManagement/PayrollManagement.vue')
-
-            },
-            {
-                path: 'PoliceAssessment',
-                component: () => import('../components/PoliceManagement/PoliceAssessment.vue')
-
-            },
-            {
-                path: 'PoliceStationInfoManagement',
-                component: () => import('../components/PoliceManagement/PoliceStationInfoManagement.vue')
-
-            },
-            {
                 path: 'PoliceOfficerInfoManagement',
                 component: () => import('../components/PoliceManagement/PoliceOfficerInfoManagement.vue')
 
             },
             {
-                path: 'AttendanceManagement',
-                component: () => import('../components/PoliceManagement/AttendanceManagement.vue')
-
-            },
-            {
                 path: 'VideoManagement',
                 component: () => import('../components/PoliceManagement/VideoManagement.vue')
-
-            },
-            {
-                path: 'AlarmResponseRecordManagement',
-                component: () => import('../components/PoliceManagement/AlarmResponseRecordManagement.vue')
-
-            },
-            {
-                path: 'ApplyForPermission',
-                component: () => import('../components/PoliceManagement/ApplyForPermission.vue'),
-                props:true,
-            },
-            {
-                path: 'PermissionManage',
-                component: () => import('../components/PoliceManagement/PermissionManage.vue'),
-                props:true,
-            },
-            {
-                path: 'PositionManage',
-                component: () => import('../components/PoliceManagement/PositionManage.vue'),
-                props:true,
-            },
-            {
-                path: 'SuspectInfoManagement',
-                component: () => import('../components/CaseManagement/SuspectInfoManagement.vue')
-
-            },
-            {
-                path: 'CriminalRecordManagement',
-                component: () => import('../components/CaseManagement/CriminalRecordManagement.vue')
-
-            },
-            {
-                path: 'VictimInfoManagement',
-                component: () => import('../components/CaseManagement/VictimInfoManagement.vue')
 
             },
             {
@@ -120,21 +60,6 @@ const routes = [
 
             },
             {
-                path: 'KeyIndividualsManagement',
-                component: () => import('../components/CaseManagement/KeyIndividualsManagement.vue')
-
-            },
-            {
-                path: 'PoliceVehicleManagement',
-                component: () => import('../components/EquipmentManagement/PoliceVehicleManagement.vue')
-
-            },
-            {
-                path: 'PoliceEquipmentManagement',
-                component: () => import('../components/EquipmentManagement/PoliceEquipmentManagement.vue')
-
-            },
-            {
                 path: 'CitizenInfoManagement',
                 component: () => import('../components/UrbanResidentmanagement/CitizenInfoManagement.vue')
 
@@ -143,12 +68,7 @@ const routes = [
                 path: 'UrbanZoningManagement',
                 component: () => import('../components/UrbanResidentmanagement/UrbanZoningManagement.vue')
 
-            },
-            {
-                path: 'RegionalDispatch',
-                component: () => import('../components/UrbanResidentmanagement/RegionalDispatch.vue')
-
-            },            
+            },          
             {
                 path: 'FamilybgCheck',
                 component: () => import('../components/UrbanResidentmanagement/FamilybgCheck.vue')

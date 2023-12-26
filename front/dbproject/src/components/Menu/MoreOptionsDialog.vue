@@ -11,30 +11,16 @@
       <el-checkbox-group :modelValue="internalSelectedOptions" @update:modelValue="internalSelectedOptions = $event">
         <el-checkbox style="width:150px" id="cb" v-for="option in options2" :key="option.label" :label="option.label" :disabled="option.authority > myAuthority">{{ option.label }}</el-checkbox>
       </el-checkbox-group>
-      
-      <h2><br>装备管理<br><div style="color:#d7caaa">----------------------------------------------------------------</div></h2>
-      <el-checkbox-group :modelValue="internalSelectedOptions" @update:modelValue="internalSelectedOptions = $event">
-        <el-checkbox style="width:150px" id="cb" v-for="option in options3" :key="option.label" :label="option.label" :disabled="option.authority > myAuthority">{{ option.label }}</el-checkbox>
-      </el-checkbox-group>
 
       <h2><br>城区和居民管理<br><div style="color:#d7caaa">----------------------------------------------------------------</div></h2>
       <el-checkbox-group :modelValue="internalSelectedOptions" @update:modelValue="internalSelectedOptions = $event">
         <el-checkbox style="width:150px" id="cb" v-for="option in options4" :key="option.label" :label="option.label" :disabled="option.authority > myAuthority">{{ option.label }}</el-checkbox>
       </el-checkbox-group>
 
-      <!-- <h2><br>数据质量管理<br><div style="color:#d7caaa">----------------------------------------------------------------</div></h2>
-      <el-checkbox-group :modelValue="internalSelectedOptions" @update:modelValue="internalSelectedOptions = $event">
-        <el-checkbox style="width:150px" id="cb" v-for="option in options5" :key="option.label" :label="option.label" :disabled="option.authority > myAuthority">{{ option.label }}</el-checkbox>
-      </el-checkbox-group> -->
-
       <h2><br>案件办理<br><div style="color:#d7caaa">----------------------------------------------------------------</div></h2>
       <el-checkbox-group :modelValue="internalSelectedOptions" @update:modelValue="internalSelectedOptions = $event">
         <el-checkbox style="width:150px" id="cb" v-for="option in options6" :key="option.label" :label="option.label" :disabled="option.authority > myAuthority">{{ option.label }}</el-checkbox>
       </el-checkbox-group>
-      <!-- <h2><br>系统日志管理<br><div style="color:#d7caaa">----------------------------------------------------------------</div></h2>
-      <el-checkbox-group :modelValue="internalSelectedOptions" @update:modelValue="internalSelectedOptions = $event">
-        <el-checkbox style="width:150px" id="cb" v-for="option in options7" :key="option.label" :label="option.label" :disabled="option.authority > myAuthority">{{ option.label }}</el-checkbox>
-      </el-checkbox-group> -->
       <el-button @click="confirmOptions">确认</el-button>
     </el-dialog>
 
@@ -55,44 +41,22 @@ export default {
       myAuthority: 0,
       options: [
         { label: '注册', authority: '1', icon: 'el-icon-star-off' },
-        { label: '警员权限修改', authority: '2', icon: 'el-icon-user' },
-        { label: '警员考核管理', authority: '1', icon: 'el-icon-suitcase' },
-        { label: '警局信息管理', authority: '4', icon: 'el-icon-date' },
         { label: '警员信息管理', authority: '0', icon: 'el-icon-food' },
-        { label: '警员出勤管理', authority: '1', icon: 'el-icon-food' },
         { label: '执法录像管理', authority: '1', icon: 'el-icon-food' },
-        { label: '接警记录管理', authority: '1', icon: 'el-icon-food' },
-        { label: '薪水管理', authority: '4', icon: 'el-icon-food' },
         // 其他选项
       ],
       options2: [
-        // { label: '证据收纳', authority: '1', icon: 'el-icon-star-off' },
-        { label: '嫌疑人信息管理', authority: '1', icon: 'el-icon-star-off' },
-        { label: '犯罪记录管理', authority: '1', icon: 'el-icon-star-off' },
-        { label: '受害人信息管理', authority: '1', icon: 'el-icon-star-off' },
         { label: '案件分类与管理', authority: '1', icon: 'el-icon-star-off' },
         { label: '犯罪数据统计', authority: '1', icon: 'el-icon-star-off' },
-        { label: '重点人员统计', authority: '1', icon: 'el-icon-star-off' },
         // 其他选项
-      ],
-      options3:[
-        { label: '警车管理', authority: '1', icon: 'el-icon-star-off' },
-        { label: '警械管理', authority: '1', icon: 'el-icon-star-off' },
       ],
       options4:[
         { label: '公民户籍管理', authority: '1', icon: 'el-icon-star-off' },
         { label: '城市地区管理', authority: '1', icon: 'el-icon-star-off' },
-        { label: '城市调度管理', authority: '1', icon: 'el-icon-star-off' },
         { label: '家族背景调查', authority: '1', icon: 'el-icon-star-off' },
-      ],
-      options5:[
-        { label: '数据质量管理', authority: '1', icon: 'el-icon-star-off' },
       ],
       options6:[
         { label: '案件办理', authority: '1', icon: 'el-icon-star-off' },
-      ],
-      options7:[
-        { label: '系统日志管理', authority: '1', icon: 'el-icon-star-off' },
       ],
     };
   },

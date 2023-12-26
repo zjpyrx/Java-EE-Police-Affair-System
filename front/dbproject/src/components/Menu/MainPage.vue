@@ -4,20 +4,9 @@
         <div><br>欢迎回来，{{ myPoliceNumber }}<br></div>
         <div style="font: 400 20px Inter, sans-serif;"><br>开始愉快的一天</div>
       </div>
-      <div class="syslogtitle">
-        <div class="syslog">系统日志</div>
-        <button style="height:80%;position: absolute;width:50px;right:20px;background-color:#c1b598;color:white;cursor: pointer;border: none;">更多</button>
-      </div>
-
-      <el-table v-if="auditInfo.length > 0" :data="auditInfo" stripe height="450" @wheel.passive.stop>
-        <el-table-column prop="username" label="用户名" />
-        <el-table-column prop="obJ_NAME" label="表名" />
-        <el-table-column prop="actioN_NAME" label="操作名称" />
-        <el-table-column prop="actioN_TIME" label="操作时间"/>
-      </el-table>
      
     </div>
-    <div style="width:31%;min-height: 100px;margin-left:5%;display:inline-block;background-color: rgba(255, 255, 255, 0.733);vertical-align: top;">
+    <div style="width:48%;min-height: 100px;margin-left:1%;display:inline-block;background-color: rgba(255, 255, 255, 0.733);vertical-align: top;">
       <div class="syslogtitle">
         <div class="syslog">常用功能</div>
         <button style="height:80%;position: absolute;width:100px;right:10px;background-color:#c1b598;color:white;cursor: pointer;border: none;" @click="showMoreOptions">更多功能</button>
@@ -83,44 +72,18 @@
       goTo(funcName) {
         if (funcName == '注册') {
           this.$router.push('/mainMenu/Register');
-        } else if (funcName == '警员权限修改') {
-          this.$router.push('/mainMenu/ChangePermission');
-        } else if (funcName == '警员考核管理') {
-          this.$router.push('/mainMenu/PoliceAssessment');
-        } else if (funcName == '警局信息管理') {
-          this.$router.push('/mainMenu/PoliceStationInfoManagement');
         } else if (funcName == '警员信息管理') {
           this.$router.push('/mainMenu/PoliceOfficerInfoManagement');
-        } else if (funcName == '警员出勤管理') {
-          this.$router.push('/mainMenu/AttendanceManagement');
         } else if (funcName == '执法录像管理') {
           this.$router.push('/mainMenu/VideoManagement');
-        } else if (funcName == '接警记录管理') {
-          this.$router.push('/mainMenu/AlarmResponseRecordManagement');
-        } else if (funcName == '薪水管理') {
-          this.$router.push('/mainMenu/PayrollManagement');
-        } else if (funcName == '嫌疑人信息管理') {
-          this.$router.push('/mainMenu/SuspectInfoManagement');
-        } else if (funcName == '犯罪记录管理') {
-          this.$router.push('/mainMenu/CriminalRecordManagement');
-        } else if (funcName == '受害人信息管理') {
-          this.$router.push('/mainMenu/VictimInfoManagement');
         } else if (funcName == '案件分类与管理') {
           this.$router.push('/mainMenu/CaseClassificationManagement');
         } else if (funcName == '犯罪数据统计') {
           this.$router.push('/mainMenu/CrimeDataStatistics');
-        } else if (funcName == '重点人员统计') {
-          this.$router.push('/mainMenu/KeyIndividualsManagement');
-        } else if (funcName == '警车管理') {
-          this.$router.push('/mainMenu/PoliceVehicleManagement');
-        } else if (funcName == '警械管理') {
-          this.$router.push('/mainMenu/PoliceEquipmentManagement');
         } else if (funcName == '公民户籍管理') {
           this.$router.push('/mainMenu/CitizenInfoManagement');
         } else if (funcName == '城市地区管理') {
           this.$router.push('/mainMenu/UrbanZoningManagement');
-        } else if (funcName == '城市调度管理') {
-          this.$router.push('/mainMenu/RegionalDispatch');
         } else if (funcName == '家族背景调查') {
           this.$router.push('/mainMenu/FamilybgCheck');
         } else if (funcName == '案件办理') {
@@ -152,18 +115,7 @@
       this.selectedOptions = JSON.parse(savedOptions);
       }
   
-      axios.post(`http://localhost:7078/api/audit`,{
-          myAuthority: localStorage.getItem('authority'),
-          myPoliceNumber: localStorage.getItem('policeNumber'), 
-      })
-      .then((response) => {
-        this.auditInfo = response.data;
-      })
-      .catch ((error) =>  {
-        // 请求失败时的处理逻辑
-        alert(error);
-        console.log("函数出错：" + error);
-      } )
+      
     
     },
   };
@@ -198,7 +150,7 @@
       {
         display: float;
         position: absolute;
-        top:40vh; /* 顶部距离为0，即页面上边缘 */
+        top:15vh; /* 顶部距离为0，即页面上边缘 */
         right: 1vw; /* 右侧距离为0，即页面右边缘 */
         overflow: auto;
         width: 31%;
