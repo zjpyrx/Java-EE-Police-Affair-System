@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- CaseInfoMapper.xml -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CaseInfoMapper">
+    <select id="getCaseInfo" resultType="org.group05.police.DTO.CaseInfoResponse">
+        SELECT * FROM cases
+        <where>
+            <if test="caseID != null and caseID != ''">
+                case_id = #{caseID}
+            </if>
+            <if test="caseType != null and caseType != ''">
+                AND case_type = #{caseType}
+            </if>
+            <if test="caseStatus != null and caseStatus != ''">
+                AND status = #{caseStatus}
+            </if>
+            <if test="caseAddress != null and caseAddress != ''">
+                AND address = #{caseAddress}
+            </if>
+            <if test="caseRanking != null and caseRanking != ''">
+                AND ranking = #{caseRanking}
+            </if>
+        </where>
+    </select>
+</mapper>
