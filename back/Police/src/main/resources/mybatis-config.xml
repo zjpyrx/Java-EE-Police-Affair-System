@@ -19,6 +19,7 @@
         <mapper resource="PoliceAccountMapper.xml"/>
         <mapper resource="CitizenMapper.xml"/>
         <mapper resource="CityCrimeInfoMapper.xml"/>
+        <mapper resource="PolicemenInfoMapper.xml"/>
     </mappers>
 
 </configuration>

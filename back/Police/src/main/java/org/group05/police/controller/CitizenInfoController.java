@@ -2,14 +2,12 @@ package org.group05.police.controller;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.apache.ibatis.session.SqlSession;
 import org.group05.police.DAO.Impl.CitizenInfoImpl;
 import org.group05.police.DTO.CitizenInfoRequest;
 import org.group05.police.DTO.CitizenInfoResponse;
 import org.group05.police.tools.SessionFactory;
-import org.group05.police.tools.TokenFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +19,7 @@ import org.springframework.http.HttpStatus;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
-public class CitizenInfo {
+public class CitizenInfoController {
     @GetMapping("api/getCitizenInfo")
     public List<CitizenInfoResponse> getCitizenInfo(@RequestParam(required = false) String citizenID,
                                                     @RequestParam(required = false) String citizenName,
@@ -45,7 +43,7 @@ public class CitizenInfo {
     public ResponseEntity<String> addCitizen(@RequestBody CitizenInfoRequest citizenInfo) {
         SqlSession sqlSession = SessionFactory.getSqlSession();
         if (sqlSession == null){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("插入数据时发生错误");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("数据库连接失败");
         }
         if (citizenInfo.getCitizenID().isEmpty() || citizenInfo.getCitizenName().isEmpty()
                 || citizenInfo.getCitizenSex().isEmpty() || citizenInfo.getCitizenAddress().isEmpty()
@@ -73,7 +71,7 @@ public class CitizenInfo {
     public ResponseEntity<String> deleteCitizen(@RequestParam String citizenID) {
         SqlSession sqlSession = SessionFactory.getSqlSession();
         if (sqlSession == null){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("插入数据时发生错误");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("数据库连接失败");
         }
         System.out.println(citizenID);
         CitizenInfoImpl citizenInfoImpl=new CitizenInfoImpl();
@@ -90,7 +88,7 @@ public class CitizenInfo {
     public ResponseEntity<String> updateCitizen(@RequestBody CitizenInfoRequest citizenInfo) {
         SqlSession sqlSession = SessionFactory.getSqlSession();
         if (sqlSession == null){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("插入数据时发生错误");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("数据库连接失败");
         }
         if (citizenInfo.getCitizenID().isEmpty() || citizenInfo.getCitizenName().isEmpty()
                 || citizenInfo.getCitizenSex().isEmpty() || citizenInfo.getCitizenAddress().isEmpty()

@@ -2,29 +2,22 @@ package org.group05.police.controller;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
-import org.group05.police.DAO.Impl.CitizenInfoImpl;
 import org.group05.police.DAO.Impl.CityCrimeInfoImpl;
-import org.group05.police.DTO.CitizenInfoRequest;
-import org.group05.police.DTO.CitizenInfoResponse;
 import org.group05.police.DTO.CityCrimeInfo;
-import org.group05.police.DTO.LoginResponse;
 import org.group05.police.tools.SessionFactory;
-import org.group05.police.tools.TokenFactory;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
-public class CityCrimeStatistic {
+public class CityCrimeStatisticController {
     @GetMapping("api/CityCrimeInfo")
     public ResponseEntity<List<CityCrimeInfo>> GetCityCrimeInfo(@RequestParam String CityName){
         SqlSession sqlSession = SessionFactory.getSqlSession();

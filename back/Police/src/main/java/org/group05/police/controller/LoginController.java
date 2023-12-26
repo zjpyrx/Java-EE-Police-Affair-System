@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
-public class Login {
+public class LoginController {
     @PostMapping("api/login")
     public LoginResponse login(@RequestBody LoginRequest loginRequest){
         SqlSession sqlSession = SessionFactory.getSqlSession();
