@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CityCrimeInfoMapper">
+    <select id="getDistrictNames" resultType="String" parameterType="String">
+        SELECT DISTINCT SUBSTRING_INDEX(address, '区', 1) as districtName
+        FROM CITIZEN
+        WHERE ADDRESS LIKE CONCAT('%', #{cityName}, '%')
+    </select>
+    <select id="getPopulationByDistrictNames" resultType="int" parameterType="java.util.List">
+        <foreach collection="list" item="districtName" separator="UNION ALL">
+            SELECT COUNT(*) FROM citizen WHERE address LIKE CONCAT('%', '${districtName}', '%')
+        </foreach>
+    </select>
+    <select id="getCrimeNumByDistrictNames" resultType="int" parameterType="java.util.List">
+        <foreach collection="list" item="districtName" separator="UNION ALL">
+            SELECT COUNT(*) FROM citizen
+            JOIN related ON citizen.ID_NUM = related.ID_NUM
+            WHERE citizen.ADDRESS LIKE CONCAT('%', '${districtName}', '%') AND related.RELATED_TYPE = '嫌疑人'
+        </foreach>
+    </select>
+    <select id="getDistrictCrimeTypes" parameterType="String"  resultType="java.util.Map">
+        SELECT
+        SUM(CASE WHEN CASE_TYPE='强奸' THEN 1 ELSE 0 END) AS count1,
+        SUM(CASE WHEN CASE_TYPE='抢劫' THEN 1 ELSE 0 END) AS count2,
+        SUM(CASE WHEN CASE_TYPE='故意伤害' THEN 1 ELSE 0 END) AS count3,
+        SUM(CASE WHEN CASE_TYPE='盗窃' THEN 1 ELSE 0 END) AS count4,
+        SUM(CASE WHEN CASE_TYPE='诈骗' THEN 1 ELSE 0 END) AS count5,
+        SUM(CASE WHEN CASE_TYPE='谋杀' THEN 1 ELSE 0 END) AS count6
+        FROM CASES
+        WHERE ADDRESS LIKE CONCAT('%', #{districtName}, '%')
+    </select>
+    <select id="getDistrictCrimeTime" resultType="java.util.Map">
+        SELECT COUNT(*) AS count,
+        CONCAT(YEAR(REGISTER_TIME), '-',
+        CASE WHEN MONTH(REGISTER_TIME) &lt; 6 THEN '上半年' ELSE '下半年' END) AS TIME_PERIOD
+        FROM cases
+        WHERE ADDRESS LIKE CONCAT('%', #{districtName}, '%')
+        GROUP BY CONCAT(YEAR(REGISTER_TIME), '-',
+        CASE WHEN MONTH(REGISTER_TIME) &lt; 6 THEN '上半年' ELSE '下半年' END)
+    </select>
+</mapper>

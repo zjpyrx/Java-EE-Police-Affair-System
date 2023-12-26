@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CitizenMapper">
+    <select id="getCitizens" resultType="java.util.Map">
+        SELECT ID_NUM as id, CITIZEN_NAME as name, GENDER as sex, ADDRESS as address, MOTHER_ID as motherid, FATHER_ID as fatherid
+        FROM CITIZEN
+        WHERE 1 = 1
+        <if test="citizenID != null">
+            AND ID_NUM LIKE CONCAT('%', '${citizenID}', '%')
+        </if>
+        <if test="citizenName != null">
+            AND CITIZEN_NAME LIKE CONCAT('%', '${citizenName}', '%')
+        </if>
+        <if test="citizenSex != null">
+            AND GENDER LIKE CONCAT('%', '${citizenSex}', '%')
+        </if>
+        <if test="citizenAddress != null">
+            AND ADDRESS LIKE CONCAT('%', '${citizenAddress}', '%')
+        </if>
+    </select>
+    <insert id="addCitizen" parameterType="org.group05.police.DTO.CitizenInfoRequest">
+        INSERT INTO CITIZEN (`ID_NUM`,
+        `CITIZEN_NAME`,
+        `GENDER`,
+        `FATHER_ID`,
+        `MOTHER_ID`,
+        `ADDRESS`)
+        VALUES (#{citizenID}, #{citizenName}, #{citizenSex}, #{fatherID}, #{motherID}, #{citizenAddress})
+    </insert>
+    <select id="selectID" resultType="Long">
+        SELECT COUNT(*) FROM CITIZEN WHERE ID_NUM = #{citizenID}
+    </select>
+    <select id="selectMotherID" resultType="Long">
+        SELECT COUNT(*) FROM CITIZEN WHERE ID_NUM = #{motherID}
+    </select>
+    <select id="selectFatherID" resultType="Long">
+        SELECT COUNT(*) FROM CITIZEN WHERE ID_NUM = #{fatherID}
+    </select>
+    <delete id="deleteCitizen" parameterType="java.lang.String">
+        DELETE FROM CITIZEN WHERE ID_NUM = #{citizenID}
+    </delete>
+    <update id="updateCitizen" parameterType="org.group05.police.DTO.CitizenInfoRequest">
+        UPDATE CITIZEN
+        SET ID_NUM = #{citizenID},
+        CITIZEN_NAME = #{citizenName},
+        GENDER = #{citizenSex},
+        ADDRESS = #{citizenAddress},
+        FATHER_ID = #{fatherID},
+        MOTHER_ID = #{motherID}
+        WHERE ID_NUM = #{citizenID}
+    </update>
+</mapper>

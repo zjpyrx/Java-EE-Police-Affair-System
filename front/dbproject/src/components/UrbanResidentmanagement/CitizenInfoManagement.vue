@@ -231,7 +231,16 @@ export default {
     },
     async addCitizenInfo() {
       try {
-        const response = await axios.post(`http://localhost:7078/api/addCitizen?citizenID=${encodeURIComponent(this.addCitizenID)}&citizenName=${encodeURIComponent(this.addCitizenName)}&citizenSex=${encodeURIComponent(this.addCitizenSex)}&citizenAddress=${encodeURIComponent(this.addCitizenAddress)}&motherID=${encodeURIComponent(this.addMotherCitizenID)}&fatherID=${encodeURIComponent(this.addFatherCitizenID)}`);
+        const data = {
+                citizenID: this.addCitizenID,
+                citizenName: this.addCitizenName,
+                citizenSex: this.addCitizenSex,
+                citizenAddress: this.addCitizenAddress,
+                motherID: this.addMotherCitizenID,
+                fatherID: this.addFatherCitizenID
+              };
+        const response = await axios.post('http://localhost:7078/api/addCitizen', data);
+        //const response = await axios.post(`http://localhost:7078/api/addCitizen?citizenID=${encodeURIComponent(this.addCitizenID)}&citizenName=${encodeURIComponent(this.addCitizenName)}&citizenSex=${encodeURIComponent(this.addCitizenSex)}&citizenAddress=${encodeURIComponent(this.addCitizenAddress)}&motherID=${encodeURIComponent(this.addMotherCitizenID)}&fatherID=${encodeURIComponent(this.addFatherCitizenID)}`);
         if (typeof response.data == "string") {
           ElMessage({
             showClose: true,
@@ -291,7 +300,16 @@ export default {
     },
     async updCitizenInfo() {
       try {
-        const response = await axios.put(`http://localhost:7078/api/updCitizen?citizenID=${encodeURIComponent(this.updCitizenID)}&citizenName=${encodeURIComponent(this.updCitizenName)}&citizenSex=${encodeURIComponent(this.updCitizenSex)}&citizenAddress=${encodeURIComponent(this.updCitizenAddress)}&motherID=${encodeURIComponent(this.updMotherCitizenID)}&fatherID=${encodeURIComponent(this.updFatherCitizenID)}`);
+        const data = {
+          citizenID: this.updCitizenID,
+          citizenName: this.updCitizenName,
+          citizenSex: this.updCitizenSex,
+          citizenAddress: this.updCitizenAddress,
+          motherID: this.updMotherCitizenID,
+          fatherID: this.updFatherCitizenID
+        };
+        const response = await axios.put('http://localhost:7078/api/updCitizen', data);
+        //const response = await axios.put(`http://localhost:7078/api/updCitizen?citizenID=${encodeURIComponent(this.updCitizenID)}&citizenName=${encodeURIComponent(this.updCitizenName)}&citizenSex=${encodeURIComponent(this.updCitizenSex)}&citizenAddress=${encodeURIComponent(this.updCitizenAddress)}&motherID=${encodeURIComponent(this.updMotherCitizenID)}&fatherID=${encodeURIComponent(this.updFatherCitizenID)}`);
         if (typeof response.data == "string") {
           ElMessage({
             showClose: true,
