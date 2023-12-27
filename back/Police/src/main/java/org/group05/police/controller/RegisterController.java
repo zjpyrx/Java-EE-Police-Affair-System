@@ -4,7 +4,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.group05.police.DAO.Impl.PolicemenImpl;
 import org.group05.police.DTO.RegisterRequest;
 import org.group05.police.DTO.RegisterResponse;
-import org.group05.police.DTO.ValidationRequest;
 import org.group05.police.tools.SessionFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,11 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Base64;
@@ -40,7 +37,7 @@ public class RegisterController {
         PolicemenImpl policemenImpl = new PolicemenImpl();
         Map<String,String> regRequest = new HashMap<>();
         // 将registerRequest中的数据提取到字典
-        regRequest.put("ID_number",registerRequest.getId_number());
+        regRequest.put("id_number",registerRequest.getId_number());
         regRequest.put("birthday",registerRequest.getBirthday());
         regRequest.put("email",registerRequest.getEmail());
         regRequest.put("gender",registerRequest.getGender());

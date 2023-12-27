@@ -1,10 +1,7 @@
 package org.group05.police.DAO.Impl;
 
 import org.apache.ibatis.session.SqlSession;
-import org.group05.police.DAO.entity.Policemen;
 import org.group05.police.DAO.mapper.PolicemenMapper;
-import org.group05.police.DTO.LoginResponse;
-import org.springframework.web.servlet.tags.Param;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,6 +18,7 @@ public class PolicemenImpl implements PolicemenMapper{
         return !police.isEmpty();
     }
 
+    @Override
     public boolean register(Map<String, String> regRequest, SqlSession sqlSession) {
         try {
             sqlSession.insert("PolicemenMapper.registerPolice", regRequest);
@@ -33,6 +31,7 @@ public class PolicemenImpl implements PolicemenMapper{
         }
     }
 
+    @Override
     public boolean validate(Map<String, String> validationRequest, SqlSession sqlSession) {
         // 根据 validationRequest 中的 queryType 决定使用哪个 SQL 映射。
         String queryType = validationRequest.get("queryType");

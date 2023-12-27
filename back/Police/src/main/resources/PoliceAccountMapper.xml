@@ -6,4 +6,10 @@
 <select id="getAuthority" resultType="int">
     select authority from police_account where police_number=#{username};
 </select>
+
+<!-- <insert id="registerAccount">
+    INSERT INTO police_account (police_number, police_key, authority) 
+    VALUES (#{policeNumber}, #{password}, #{authority});
+</insert> -->
+
 </mapper>

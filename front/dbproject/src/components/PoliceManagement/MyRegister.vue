@@ -130,7 +130,7 @@
         signinInfo: {
           police_number: "",
           police_name: "",
-          ID_number: "",
+          id_number: "",
           birthday: "",
           gender: "",
           nation: "",
