@@ -34,7 +34,7 @@
         <div class="inputContainer">
           <div class="inputTitle">身份证号</div>
           <div>
-            <input class="input" v-model="signinInfo.ID_number" /><span class="ssqpoptip">请输入正确的身份证号</span>
+            <input class="input" v-model="signinInfo.id_number" /><span class="ssqpoptip">请输入正确的身份证号</span>
             <div class="message" v-show="this.ID_number_message !== ''" :style="{ color: this.ID_number_color }" >
               {{ this.ID_number_message }}
             </div>
@@ -164,7 +164,9 @@
       // 添加新用户
       addNewUser() {
         for (let key in this.signinInfo) {
+          console.log(this.signinInfo[key]);
           if (this.signinInfo[key] === "") {
+            
             alert("请填写完整信息");
             return;
           }
@@ -221,8 +223,8 @@
                 this.ID_number_message = "✔";
                 this.ID_number_color = "green";
                 this.signinInfo.gender =
-                  Number(this.signinInfo.ID_number[16]) % 2 == 1 ? "男" : "女";
-                this.calcBirthday(this.signinInfo.ID_number.slice(6, 14));
+                  Number(this.signinInfo.id_number[16]) % 2 == 1 ? "男" : "女";
+                this.calcBirthday(this.signinInfo.id_number.slice(6, 14));
               } else {
                 this.ID_number_message = "该身份证号已注册过";
                 this.ID_number_color = "red";
@@ -254,7 +256,7 @@
           this.checkLegal("police_number", val);
         }
       },
-      "signinInfo.ID_number": function (val) {
+      "signinInfo.id_number": function (val) {
         if (val.length != 18) {
           this.ID_number_message = "✖";
           this.ID_number_color = "red";

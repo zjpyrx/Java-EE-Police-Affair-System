@@ -22,6 +22,7 @@
         <mapper resource="PolicemenInfoMapper.xml"/>
         <mapper resource="FamilyMapper.xml"/>
         <mapper resource="VideoMapper.xml"/>
+        <mapper resource="CitizenMapper.xml"/>
     </mappers>
 
 </configuration>

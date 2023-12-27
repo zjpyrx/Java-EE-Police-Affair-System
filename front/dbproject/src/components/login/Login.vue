@@ -63,9 +63,6 @@
             </div>
             <div class="bottombox">
               <button class="confirmlogin" type="submit">确认登录</button>
-              <div class="password-link">
-                <a class="password-link-text" @click="pagechange">修改密码</a>
-              </div>
             </div>
             <div class="code-feedbackbox">
               <p v-if="error" class="error-message">{{ error }}</p>
