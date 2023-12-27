@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="FamilyMapper">
+    <select id="queryMe" resultType="org.group05.police.DAO.entity.Crime">
+        select citizen.ID_num as ID_num,citizen_name,gender,case_type
+        from citizen inner join related on citizen.ID_num=related.ID_num
+            inner join cases on related.case_ID=cases.case_ID
+        where citizen.ID_num=#{target} and related_type='犯人'
+        order by case_type;
+    </select>
+    <select id="queryChild" resultType="org.group05.police.DAO.entity.Crime">
+        select citizen.ID_num,citizen_name,gender,case_type
+        from citizen inner join related on citizen.ID_num=related.ID_num
+            inner join cases on related.case_ID=cases.case_ID
+        where mother_ID=#{target}
+            or father_ID=#{target}
+        order by citizen.ID_num,case_type;
+    </select>
+    <select id="queryFather" resultType="org.group05.police.DAO.entity.Crime">
+        select citizen.ID_num,citizen_name,gender,case_type
+        from citizen inner join related on citizen.ID_num=related.ID_num
+            inner join cases on related.case_ID=cases.case_ID
+        where citizen.ID_num in(
+            select father_ID
+            from citizen
+            where ID_num=#{target})
+        order by case_type;
+    </select>
+    <select id="queryMother" resultType="org.group05.police.DAO.entity.Crime">
+        select citizen.ID_num,citizen_name,gender,case_type
+        from citizen inner join related on citizen.ID_num=related.ID_num
+            inner join cases on related.case_ID=cases.case_ID
+        where citizen.ID_num in (
+            select mother_ID
+            from citizen
+            where ID_num=#{target})
+        order by case_type;
+    </select>
+</mapper>

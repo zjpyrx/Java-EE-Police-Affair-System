@@ -14,15 +14,15 @@ public class TokenFactory {
     public static final String APP_SECRET = "xxx@#$%^&dong";
 
     //生成token方法:传入用户名、用户ID 作为payload写入，便于后期解析
-    public static String createToken(int id, String name,int authority) {
+    public static String createToken(int id, String name) {
         Calendar instance = Calendar.getInstance();
         instance.add(Calendar.SECOND, TOKEN_TIMEOUT);
         String token = JWT.create()
                 .withClaim("uid", id)        //payload，写入变量，用户ID
                 .withClaim("uname", name)  //payload，写入变量，用户名
-                .withClaim("authority",authority)
                 .withExpiresAt(instance.getTime())   //设置过期
                 .sign(Algorithm.HMAC256(APP_SECRET));//签名及算法
         return token;
     }
+
 }

@@ -14,11 +14,10 @@ public class PolicemenImpl implements PolicemenMapper{
     @Override
     public boolean login(String id, String pwd, SqlSession sqlSession) {
         Map<String, Object> params = new HashMap<>();
-        params.put("id", id);
-        params.put("pwd", pwd);
+        params.put("username", id);
+        params.put("password", pwd);
         List<Integer> police=sqlSession.selectList("PolicemenMapper.checkPassword", params);
         System.out.println(police);
         return !police.isEmpty();
     }
-
 }

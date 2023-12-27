@@ -8,7 +8,7 @@
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://82.156.161.216/police?characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=GMT%2B8&amp;allowPublicKeyRetrieval=true"/>
+                <property name="url" value="jdbc:mysql://82.156.161.216:3306/police?characterEncoding=utf-8&amp;useSSL=false&amp;serverTimezone=GMT%2B8&amp;allowPublicKeyRetrieval=true"/>
                 <property name="username" value="root"/>
                 <property name="password" value="peking_neo0214"/>
             </dataSource>
@@ -16,7 +16,8 @@
     </environments>
     <mappers>
         <mapper resource="PoliceMapper.xml"/>
-        <mapper resource="PoliceAccountMapper.xml"/>
+        <mapper resource="FamilyMapper.xml"/>
+        <mapper resource="VideoMapper.xml"/>
     </mappers>
 
 </configuration>
