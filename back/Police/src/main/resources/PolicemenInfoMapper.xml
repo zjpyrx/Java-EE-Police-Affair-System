@@ -3,6 +3,22 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="PolicemenInfoMapper">
+    <select id="getSinglePolicemenInfo" resultType="org.group05.police.DTO.PolicemenInfoResponse">
+        SELECT
+        POLICE_NUMBER AS pid,
+        POLICE_NAME AS name,
+        ID_NUMBER AS idn,
+        BIRTHDAY AS birthday,
+        GENDER AS gender,
+        NATION AS nation,
+        PHONE_NUMBER AS phone,
+        EMAIL AS email,
+        STATUS AS status,
+        POSITION AS position
+        FROM
+        POLICEMEN
+        WHERE POLICE_NUMBER = #{policeID}
+    </select>
     <select id="getPolicemenInfo" resultType="java.util.Map">
         SELECT
         POLICE_NUMBER AS pid,

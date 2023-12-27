@@ -1,6 +1,6 @@
 <template>
    <el-header class="sub-header" @mousemove="handleMouseMove">
-    <div>&nbsp;&nbsp;城区和居民管理&nbsp;>&nbsp;城市地区管理</div>
+    <div>&nbsp;&nbsp;城区和居民管理&nbsp;>&nbsp;城市地区数据统计</div>
   </el-header>
   
 <!--LHM编写用于呈现区域犯罪信息与人口情况-->

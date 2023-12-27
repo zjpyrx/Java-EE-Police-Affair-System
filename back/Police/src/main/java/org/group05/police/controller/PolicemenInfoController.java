@@ -17,12 +17,45 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Base64;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:8080")
 public class PolicemenInfoController {
+    @PostMapping("api/policemenInfo")
+    public ResponseEntity<PolicemenInfoResponse> getPolicemanInfo(
+            @RequestParam(required = false) String policeNumber
+    ){
+        SqlSession sqlSession = SessionFactory.getSqlSession();
+        if (sqlSession == null){
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        }
+        System.out.println("getPolicemanInfo");
+        System.out.println(policeNumber);
+        PolicemenInfoImpl policemenInfoImpl=new PolicemenInfoImpl();
+        PolicemenInfoResponse res = policemenInfoImpl.getPolicemanInfo(policeNumber,sqlSession);
+        System.out.println(res.getPid());
+
+        Path path = Paths.get("D:\\Work\\大三上\\java\\endOfTermProj\\Java-EE-Police-Affair-System\\back\\Police\\img\\"+policeNumber+".jpg");
+
+        try {
+            byte[] imageBytes = Files.readAllBytes(path);
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            System.out.println(base64Image);
+            res.setPic(base64Image);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body(res);
+    }
+
     @GetMapping("api/policemenInfo")
-    public ResponseEntity<List<PolicemenInfoResponse>> getPolicemenInfo(
+    public ResponseEntity<List<PolicemenInfoResponse>> getPolicemenInfoList(
             @RequestParam(required = false) String policemenID,
             @RequestParam(required = false) String policemenName,
             @RequestParam(required = false) String policemenIDNum,

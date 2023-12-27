@@ -20,6 +20,8 @@
         <mapper resource="CitizenMapper.xml"/>
         <mapper resource="CityCrimeInfoMapper.xml"/>
         <mapper resource="PolicemenInfoMapper.xml"/>
+        <mapper resource="FamilyMapper.xml"/>
+        <mapper resource="VideoMapper.xml"/>
     </mappers>
 
 </configuration>

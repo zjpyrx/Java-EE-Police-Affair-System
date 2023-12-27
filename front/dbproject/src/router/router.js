@@ -40,6 +40,10 @@ const routes = [
 
             },
             {
+                path:'SecretChat',
+                component: () => import('../components/SecretChat.vue')
+            },
+            {
                 path: 'PoliceOfficerInfoManagement',
                 component: () => import('../components/PoliceManagement/PoliceOfficerInfoManagement.vue')
 

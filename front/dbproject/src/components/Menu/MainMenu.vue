@@ -125,17 +125,6 @@
               />
               案件分类与管理
             </el-menu-item>
-            <el-menu-item
-              index="/mainMenu/CrimeDataStatistics"
-              @click="scrollToTop"
-            >
-              <img
-                class="nav-icon-for-menu-item"
-                src="../../assets/logos/CrimeDataStatistics.png"
-                alt="Icon"
-              />
-              犯罪数据统计
-            </el-menu-item>
           </el-sub-menu>
 
           <!-- 城区和居民管理 -->
@@ -170,7 +159,7 @@
                 src="../../assets/logos/UrbanZoningManagement.png"
                 alt="Icon"
               />
-              城市地区管理
+              城市地区数据统计
             </el-menu-item>
             <el-menu-item index="/mainMenu/FamilybgCheck" @click="scrollToTop">
               <img
@@ -195,7 +184,18 @@
             />
             案件办理
           </el-menu-item>
-
+          <el-menu-item
+            v-if="myAuthority >= 1"
+            index="/mainMenu/SecretChat"
+            @click="scrollToTop"
+          >
+            <img
+              class="nav-icon-for-menu-item"
+              src="../../assets/logos/SecretChat.jpg"
+              alt="Icon"
+            />
+            行动交流
+          </el-menu-item>
       
         </el-menu>
       </el-aside>
@@ -216,6 +216,9 @@
   <el-drawer v-model="drawer2" :direction="direction">
     <template #header> </template>
     <template #default>
+      <div>
+        <img :src="myPic !== 'noPic' ? myPicDataURL : mynoPic" alt="My Image" style="width: 150px; height: 200px;">
+      </div>
    
       <div class="myInfo">
         <span>警号：{{ myPoliceNumber }}</span>
@@ -258,7 +261,7 @@
 </template>
 
 <script lang="js" setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import axios from "axios";
 
 const containerHeight= ref(1500) // 初始化容器高度
@@ -284,33 +287,46 @@ const myPeoples =ref("");
 const myPhone=ref("");
 const myStatus=ref("");
 const myPosition=ref("");
+const myPic=ref("noPic");
+const myPicDataURL = computed(() => {
+  return `data:image/png;base64,${myPic.value}`;
+});
+const mynoPic='data:image/png;base64,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';
 
 function handleSelfInfoClick(event)
 {
       drawer2.value = true;
-      axios.post("http://localhost:7078/api/policemenInfo", {
-          policemenNumber: myPoliceNumber,
-          policemenName: "",
-          policemenStatus: "全部",
-          policemenPosition: "全部",
-        })
+      axios.post(`http://localhost:7078/api/policemenInfo?`, {
+          policeNumber: myPoliceNumber
+        },{
+  headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+})
         .then((res) => {
-          policemenInfo.value = res.data;
+          const policemenInfo = res.data;
 
-            if (policemenInfo.value[0].gender === "F") {
-              policemenInfo.value[0].gender = "女";
-            } else if (policemenInfo[0].value.gender === "M") {
-              policemenInfo.value[0].gender = "男";
-            }
-            if (Array.isArray(policemenInfo.value) && policemenInfo.value.length > 0) {
-        myName.value=policemenInfo.value[0].policemenName;
-        mySex.value=policemenInfo.value[0].gender;
-        myBirthday.value=policemenInfo.value[0].birthday;
-        myPeoples.value =policemenInfo.value[0].nation;
-        myPhone.value=policemenInfo.value[0].phoneNumber;
-        myStatus.value=policemenInfo.value[0].policemenStatus;
-        myPosition.value=policemenInfo.value[0].policemenPosition;
-        } 
+    if (policemenInfo.gender === "F") {
+      policemenInfo.gender = "女";
+    } else if (policemenInfo.gender === "M") {
+      policemenInfo.gender = "男";
+    }
+
+    myName.value = policemenInfo.name;
+    mySex.value = policemenInfo.gender;
+    myBirthday.value = policemenInfo.birthday;
+    myPeoples.value = policemenInfo.nation;
+    myPhone.value = policemenInfo.phone;
+    myStatus.value = policemenInfo.status;
+    myPosition.value = policemenInfo.position;
+    
+    //myPic.value=policemenInfo.pic;
+    if (policemenInfo.pic === null) {
+      myPic.value = "noPic";
+    } else {
+      myPic.value = policemenInfo.pic;
+    }
+    console.log(myPic.value)
         })
         .catch((err) => {
           console.log(err);

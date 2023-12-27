@@ -8,9 +8,6 @@
       <div class="ssqtitletest"><span>添&nbsp;加&nbsp;新&nbsp;用&nbsp;户</span></div>
       <!-- 以下为添加新用户的表单 -->
       <div class="content">
-
-        <input type="file" @change="onImageChange" />
-
         <!-- 每个输入栏由inputContainer组合，内含标题inputTitle、输入框input、可能含错误提示message -->
         <!-- police_number -->
         <div class="inputContainer">
@@ -70,7 +67,12 @@
             </div>
           </div>
         </div>
-
+        <div class="inputContainer">
+          <div class="inputTitle">上传头像</div>
+          <div>
+            <input type="file" @change="onImageChange" />
+          </div>
+        </div>
         <!-- phone_number -->
         <div class="inputContainer">
           <div class="inputTitle">联系方式</div>

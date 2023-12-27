@@ -12,6 +12,13 @@ import java.util.List;
 import java.util.Map;
 
 public class PolicemenInfoImpl implements PolicemenInfoMapper {
+    public PolicemenInfoResponse getPolicemanInfo(String policeID,SqlSession sqlSession){
+        Map<String, String> params = new HashMap<>();
+        params.put("policeID", policeID);
+        PolicemenInfoResponse res = sqlSession.selectOne("PolicemenInfoMapper.getSinglePolicemenInfo", params);
+        System.out.println(res);
+        return res;
+    }
     public List<PolicemenInfoResponse> getPolicemenInfo(PolicemenInfoRequest policemenInfoRequest, SqlSession sqlSession){
         Map<String, String> params = new HashMap<>();
         params.put("policemenID", policemenInfoRequest.getPolicemenID());
