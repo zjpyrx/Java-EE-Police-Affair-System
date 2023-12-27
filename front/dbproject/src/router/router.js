@@ -7,6 +7,7 @@ const routes = [
         path: '/',
         component: () => import('../WelcomePage.vue')
     },
+    
     {
         path: '/login',
         component: () => import('../components/login/Login.vue')
@@ -33,6 +34,10 @@ const routes = [
                 path: 'MainPage',
                 component: () => import('../components/Menu/MainPage.vue')
 
+            },
+            {
+                path:'SecretChat',
+                component: () => import('../components/SecretChat.vue')
             },
             {
                 path: 'Register',

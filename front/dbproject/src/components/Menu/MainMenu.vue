@@ -371,6 +371,18 @@
             案件办理
           </el-menu-item>
 
+          <el-menu-item
+            v-if="myAuthority >= 1"
+            index="/mainMenu/SecretChat"
+            @click="scrollToTop"
+          >
+            <img
+              class="nav-icon-for-menu-item"
+              src="../../assets/logos/SecretChat.jpg"
+              alt="Icon"
+            />
+            行动交流
+          </el-menu-item>
       
         </el-menu>
       </el-aside>

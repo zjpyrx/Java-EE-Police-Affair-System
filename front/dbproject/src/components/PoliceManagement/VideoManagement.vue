@@ -8,37 +8,15 @@
         <label style="position: relative; display: block">
           <div class="ssqinputtext">输入录像ID</div>
           <input class="ssqinputinfobox" type="text" v-model="videoID" placeholder="录像ID" />
-        </label>
-
-        <label style="position: relative; display: block">
-          <div class="ssqinputtext">输入涉及警员的警号</div>
-          <input class="ssqinputinfobox" type="text" v-model="principleID" placeholder="涉及警员的警号" />
-        </label>
-
-        <div class="ssqinputtext">选择录像类别</div>
-        <select class="zyhselect" v-model="videoType">
-          <option selected value="全部">全部录像</option>
-          <option value="审讯">审讯</option>
-          <option value="监控">监控</option>
-          <option value="调查">调查</option>
-        </select>
+        </label>        
       </div>
       <div class="btncontainer">
         <button class="ssqbutton1" @click="fetchvideoInfo" @mousemove="handleMouseMove">
           <span>查询</span>
         </button>
       </div>
+      <video v-if="this.isOK" controls autoplay :src="this.link"></video>
 
-      <!-- 表格显示获取的警员信息 -->
-      <el-table v-if="videoInfo.length > 0" :data="videoInfo" stripe height="450" @wheel.passive.stop>
-        <el-table-column prop="videoID" label="录像编号" />
-        <el-table-column prop="recordTime" label="记录时间" />
-        <el-table-column prop="uploadTime" label="上传时间" />
-        <el-table-column prop="videoType" label="录像类型" />
-        <el-table-column prop="principleID" label="涉及警员的警号" />
-      </el-table>
-      <!-- 错误提示 -->
-      <div v-else>{{ boxContent }}</div>
     </section>
   </main>
 </template>
@@ -49,12 +27,11 @@ import axios from "axios";
 export default {
   data() {
     return {
+      link:"http://localhost:7078/getVideo/video",
       videoID: "",
-      videoType: "全部",
-      principleID: "",
-      videoInfo: [],
-      err: "警员不存在！",
-      boxContent:"",
+      isOK:false,
+      err: "视频不存在！",
+      boxContent:"无效的ID",
     };
   },
   methods: {
@@ -66,14 +43,19 @@ export default {
         event.target.style.setProperty('--y', `${y}px`);
       },
     fetchvideoInfo() {
+      this.isOK=false;
       axios
         .post("http://localhost:7078/api/videoInfo", {
           videoID: this.videoID,
-          videoType: this.videoType,
-          principleID: this.principleID,
         })
         .then((res) => {
-          this.videoInfo = res.data;
+          if(res.data.ok){
+            this.isOK=true;
+            this.link=`http://localhost:7078/getVideo/video?number=${this.videoID}`;
+          }
+          else{
+            this.isOK=false;
+          }
           console.log(res.data);
         })
         .catch((err) => {
