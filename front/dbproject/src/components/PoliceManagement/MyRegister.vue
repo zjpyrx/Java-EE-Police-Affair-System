@@ -2,11 +2,15 @@
   <el-header class="sub-header" @mousemove="handleMouseMove">
       <div>&nbsp;&nbsp;警员管理&nbsp;>&nbsp;注册</div>
     </el-header>
-  
+    
+    
     <div class="container" @wheel.passive.stop>
       <div class="ssqtitletest"><span>添&nbsp;加&nbsp;新&nbsp;用&nbsp;户</span></div>
       <!-- 以下为添加新用户的表单 -->
       <div class="content">
+
+        <input type="file" @change="onImageChange" />
+
         <!-- 每个输入栏由inputContainer组合，内含标题inputTitle、输入框input、可能含错误提示message -->
         <!-- police_number -->
         <div class="inputContainer">
@@ -126,7 +130,7 @@
         signinInfo: {
           police_number: "",
           police_name: "",
-          ID_number: "",
+          id_number: "",
           birthday: "",
           gender: "",
           nation: "",
@@ -134,6 +138,7 @@
           email: "",
           status: "",
           position: "",
+          image: "",
         },
         // 以下为提高用户体验的变量
         police_number_message: "",
@@ -177,7 +182,7 @@
         axios
           .put("http://localhost:7078/api/Register", this.signinInfo)
           .then((response) => {
-            if (response.data == "success") {
+            if (response.data.success) {
               alert("添加成功");
             } else {
               alert("网络错误，请重试");
@@ -225,6 +230,14 @@
           .catch((error) => {
             console.error(error);
           });
+      },
+        onImageChange(e) {
+          const file = e.target.files[0];
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            this.signinInfo.image = e.target.result;
+          };
+          reader.readAsDataURL(file);
       },
     },
     watch: {

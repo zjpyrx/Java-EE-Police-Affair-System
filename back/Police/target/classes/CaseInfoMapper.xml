@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- CaseInfoMapper.xml -->
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CaseInfoMapper">
+    <select id="getCaseInfo" resultType="org.group05.police.DTO.CaseInfoResponse">
+        SELECT * FROM cases
+        <where>
+            <if test="caseID != null and caseID != ''">
+                case_id LIKE CONCAT('%', #{caseID}, '%')
+            </if>
+            <if test="caseType != null and caseType != ''">
+                AND case_type = #{caseType}
+            </if>
+            <if test="caseStatus != null and caseStatus != ''">
+                AND status = #{caseStatus}
+            </if>
+            <if test="caseAddress != null and caseAddress != ''">
+                AND address LIKE CONCAT('%', #{caseAddress}, '%')
+            </if>
+            <if test="caseRanking != null and caseRanking != ''">
+                AND ranking = #{caseRanking}
+            </if>
+        </where>
+    </select>
+
+    <update id="closeCase">
+        UPDATE cases
+        <set>
+            status = "结案",
+        </set>
+        <where>
+            case_id = #{caseID}
+            AND case_type = #{caseType}
+        </where>
+    </update>
+
+    <update id="updateCase">
+        UPDATE cases
+        <set>
+            <if test="oriCaseID != null and oriCaseID != ''">
+                case_id = #{updCaseID},
+            </if>
+            <if test="updCaseType != null and updCaseType != ''">
+                case_type = #{updCaseType},
+            </if>
+            <if test="updCaseAddress != null and updCaseAddress != ''">
+                address = #{updCaseAddress},
+            </if>
+            <if test="updRanking != null">
+                ranking = #{updCaseRanking},
+            </if>
+        </set>
+        WHERE case_id = #{oriCaseID}
+    </update>
+
+    <insert id="insertCaseInfo">
+        INSERT INTO cases (case_id, case_type, status, register_time, address, ranking)
+        VALUES (#{caseID}, #{caseType}, #{caseStatus}, #{registerTime}, #{caseAddress}, #{caseRanking})
+    </insert>
+
+    <delete id="deleteCase" parameterType="string">
+        DELETE FROM cases WHERE case_id = #{caseID} AND case_type = #{caseType}
+    </delete>
+
+</mapper>

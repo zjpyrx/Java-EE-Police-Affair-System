@@ -356,6 +356,8 @@ export default {
         const response = await axios.get(`http://localhost:7078/api/caseInfo?caseID=${encodeURIComponent(this.caseID)}&caseType=${encodeURIComponent(this.caseType)}&caseStatus=${encodeURIComponent(this.caseStatus)}&caseAddress=${encodeURIComponent(this.caseAddress)}&caseRanking=${encodeURIComponent(this.caseRanking)}`);
         this.caseInfo = response.data;
       } catch (error) {
+        console.error(error);
+        console.log(this.caseInfo);
         // 请求失败时的处理逻辑
         ElMessage({
           showClose: true,

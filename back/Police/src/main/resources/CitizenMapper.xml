@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CitizenMapper">
+
+    <select id="getCitizenInfo" resultType="org.group05.police.DTO.CitizenInfoResponse">
+        SELECT * FROM citizen
+        <where>
+            <if test="id_num != null and id_num != ''">
+                id_num LIKE CONCAT('%', #{id_num}, '%')
+            </if>
+            <if test="citizen_name != null and citizen_name != ''">
+                AND citizen_name = #{citizen_name}
+            </if>
+            <if test="gender != null and gender != ''">
+                AND gender = #{gender}
+            </if>
+            <if test="address != null and address != ''">
+                AND address LIKE CONCAT('%', #{address}, '%')
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertCitizen">
+        INSERT INTO citizen (
+            id_num, 
+            citizen_name, 
+            gender, 
+            address, 
+        ) VALUES (
+            #{id_num}, 
+            #{citizen_name}, 
+            #{gender}, 
+            #{address}, 
+        );
+    </insert>
+
+    <insert id="insertRelated">
+        INSERT INTO related (
+            case_id, 
+            id_num, 
+            related_type, 
+        ) VALUES (
+            #{case_id}, 
+            #{id_num}, 
+            #{related_type}, 
+        );
+    </insert>
+
+    <select id="getCitizenInfo" resultType="org.group05.police.DTO.CitizenInfoResponse">
+        SELECT * FROM related
+        <where>
+            <if test="case_id != null and case_id != ''">
+                case_id LIKE CONCAT('%', #{case_id}, '%')
+            </if>
+            <if test="id_num != null and id_num != ''">
+                AND id_num = #{id_num}
+            </if>
+            <if test="related_type != null and related_type != ''">
+                AND related_type = #{related_type}
+            </if>
+        </where>
+    </select>
+
+    
+    <select id="getCaseDetail" resultType="org.group05.police.DTO.CitizenInfoResponse">
+        SELECT * FROM related
+        <where>
+            <if test="case_id != null and case_id != ''">
+                case_id LIKE CONCAT('%', #{case_id}, '%')
+            </if>
+            <if test="id_num != null and id_num != ''">
+                AND id_num = #{id_num}
+            </if>
+            <if test="related_type != null and related_type != ''">
+                AND related_type = #{related_type}
+            </if>
+        </where>
+    </select>
+    
+
+</mapper>
